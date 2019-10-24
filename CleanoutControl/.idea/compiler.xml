@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="Project_Achieve_Hownet_Org" />
+        <module name="Project_Achieve_Org2" />
+        <module name="Project_Achieve_Person2" />
+        <module name="Project_CleanAchieve" />
+        <module name="Project_CleanInstrument" />
+        <module name="Project_Instru_Org" />
+        <module name="Project_Instru_Person" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="CleanoutControl" target="1.7" />
+      <module name="Project_Achieve_Hownet_Org" target="1.7" />
+      <module name="Project_Achieve_Org2" target="1.7" />
+      <module name="Project_Achieve_Person2" target="1.7" />
+      <module name="Project_CleanAchieve" target="1.7" />
+      <module name="Project_CleanInstrument" target="1.7" />
+      <module name="Project_Instru_Org" target="1.7" />
+      <module name="Project_Instru_Person" target="1.7" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

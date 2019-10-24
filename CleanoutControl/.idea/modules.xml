@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/CleanoutControl.iml" filepath="$PROJECT_DIR$/CleanoutControl.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Project_Achieve_Hownet_Org/Project_Achieve_Hownet_Org.iml" filepath="$PROJECT_DIR$/Project_Achieve_Hownet_Org/Project_Achieve_Hownet_Org.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Project_Achieve_Org2.iml" filepath="$PROJECT_DIR$/Project_Achieve_Org2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Project_Achieve_Person2.iml" filepath="$PROJECT_DIR$/Project_Achieve_Person2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Project_CleanAchieve.iml" filepath="$PROJECT_DIR$/Project_CleanAchieve.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Project_CleanInstrument.iml" filepath="$PROJECT_DIR$/Project_CleanInstrument.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Project_Instru_Org.iml" filepath="$PROJECT_DIR$/Project_Instru_Org.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Project_Instru_Person.iml" filepath="$PROJECT_DIR$/Project_Instru_Person.iml" />
+    </modules>
+  </component>
+</project>

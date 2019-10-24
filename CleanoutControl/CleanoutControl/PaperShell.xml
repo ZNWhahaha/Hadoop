@@ -1,0 +1,11 @@
+step_1==>java -jar jar_paper/update_profile_id.jar profile_id/paper_id.xml 2017-11-08-22:19:45#2017-11-09-11:36:16
+step_2==>java -jar jar_paper/create_hbase_table.jar Author_11 basicInf,paper
+step_3==>hadoop jar jar_paper/author_merger_1.jar PAPER Author_11 hdfs:///user/hadoop/Province.xml 2017-11-08-22:19:45#2017-11-09-11:36:16
+step_4==>java -jar jar_paper/create_hbase_table.jar Author_22 basicInf,paper
+step_5==>hadoop jar jar_paper/author_merger_2.jar Author_11 Author_22 hdfs:///user/hadoop/OrgMap.xml
+step_6==>hadoop jar jar_paper/update_paper.jar Author_22 PAPER 2017-11-08-22:19:45#2017-11-09-11:36:16
+step_7==>hadoop jar jar_paper/paper_person.jar Author_22 PersonProfile
+step_8==>java -jar jar_paper/update_personID.jar profile_id/person_id.xml
+step_9==>hadoop jar jar_paper/person_org_2.jar PersonProfile OrgProfile
+step_10==>java -jar jar_paper/update_profile_id.jar profile_id/org_id.xml
+step_11==>hadoop jar jar_paper/co_author.jar PersonProfile hdfs:///user/hadoop/Paper2Author

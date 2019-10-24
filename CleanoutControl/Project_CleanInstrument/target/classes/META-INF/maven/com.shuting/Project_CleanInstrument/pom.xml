@@ -1,0 +1,301 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.shuting</groupId>
+  <artifactId>Project_CleanInstrument</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <name>Project_CleanInstrument</name>
+  <url>http://maven.apache.org</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>    
+    
+   <!-- https://mvnrepository.com/artifact/org.apache.hadoop/hadoop-mapreduce-client-core -->
+   <dependency>
+      <groupId>org.apache.hadoop</groupId>
+      <artifactId>hadoop-mapreduce-client-core</artifactId>
+      <version>2.5.1</version>       
+      <exclusions>
+         <exclusion>
+     		<groupId>*</groupId>
+     		<artifactId>*</artifactId>
+     	 </exclusion>     	 
+      </exclusions>       
+    </dependency>
+     
+    <dependency>
+      <groupId>org.apache.hadoop</groupId>
+      <artifactId>hadoop-mapreduce-client-common</artifactId>
+      <version>2.5.1</version>       
+      <exclusions>
+    	 <exclusion>
+     		<groupId>*</groupId>
+     		<artifactId>*</artifactId>
+     	 </exclusion>     	 
+      </exclusions>       
+    </dependency>
+     
+   <dependency>
+      <groupId>org.codehaus.jackson</groupId>
+      <artifactId>jackson-core-asl</artifactId>
+      <version>1.9.13</version>
+       <exclusions>
+     	<exclusion>
+     		<groupId>*</groupId>
+     		<artifactId>*</artifactId>
+     	</exclusion>     	 
+      </exclusions>
+    </dependency> 
+    
+    <dependency>
+      <groupId>org.codehaus.jackson</groupId>
+      <artifactId>jackson-mapper-asl</artifactId>
+      <version>1.9.13</version>
+       <exclusions>
+     	<exclusion>
+     		<groupId>*</groupId>
+     		<artifactId>*</artifactId>
+     	</exclusion>     	 
+      </exclusions>
+    </dependency>  
+    
+    <!-- https://mvnrepository.com/artifact/org.apache.avro/avro -->
+   <dependency>
+    <groupId>org.apache.avro</groupId>
+    <artifactId>avro</artifactId>
+    <version>1.7.4</version>
+     <exclusions>
+     	<exclusion>
+     		<groupId>*</groupId>
+     		<artifactId>*</artifactId>
+     	</exclusion>     	 
+     </exclusions>
+   </dependency>
+        
+     <!-- https://mvnrepository.com/artifact/org.apache.hadoop/hadoop-yarn-common -->
+   <dependency>
+     <groupId>org.apache.hadoop</groupId>
+     <artifactId>hadoop-yarn-common</artifactId>
+     <version>2.6.0</version>
+      <exclusions>
+     	 <exclusion>
+     		<groupId>*</groupId>
+     		<artifactId>*</artifactId>
+     	 </exclusion>     	 
+      </exclusions>     
+   </dependency>     
+   
+    <!-- https://mvnrepository.com/artifact/org.apache.hadoop/hadoop-yarn-api -->
+    <dependency>
+      <groupId>org.apache.hadoop</groupId>
+      <artifactId>hadoop-yarn-api</artifactId>
+      <version>2.6.0</version>         
+    </dependency>    
+  
+   <dependency>
+    <groupId>org.apache.hadoop</groupId>
+    <artifactId>hadoop-yarn-client</artifactId>
+    <version>2.6.0</version>
+      <exclusions>
+     	 <exclusion>
+     		<groupId>*</groupId>
+     		<artifactId>*</artifactId>
+     	 </exclusion>     	 
+      </exclusions>    
+   </dependency>   
+   
+  <dependency>
+    <groupId>org.apache.hadoop</groupId>
+    <artifactId>hadoop-yarn-server-common</artifactId>
+    <version>2.6.0</version>
+      <exclusions>
+     	 <exclusion>
+     		<groupId>*</groupId>
+     		<artifactId>*</artifactId>
+     	 </exclusion>     	 
+      </exclusions>    
+   </dependency> 
+  
+    <dependency>
+    <groupId>org.apache.hadoop</groupId>
+    <artifactId>hadoop-yarn-server-nodemanager</artifactId>
+    <version>2.6.0</version>
+      <exclusions>
+     	 <exclusion>
+     		<groupId>*</groupId>
+     		<artifactId>*</artifactId>
+     	 </exclusion>     	 
+      </exclusions>    
+   </dependency> 
+     
+     <dependency>
+      <groupId>org.apache.servicemix.bundles</groupId>
+      <artifactId>org.apache.servicemix.bundles.hbase</artifactId>
+      <version>1.2.2_1</version>
+       <exclusions>
+     	<exclusion>
+     		<groupId>*</groupId>
+     		<artifactId>*</artifactId>
+     	</exclusion>     	 
+      </exclusions>
+    </dependency> 
+    
+    <dependency>
+      <groupId>org.apache.hbase</groupId>
+      <artifactId>hbase-client</artifactId>
+      <version>1.1.6</version>
+      
+       <exclusions>	           
+            <exclusion>
+			  <groupId>org.apache.hadoop</groupId>
+			  <artifactId>hadoop-mapreduce-client-core  </artifactId>
+		    </exclusion>
+            
+		    <exclusion>
+			  <groupId>org.apache.avro</groupId>
+			  <artifactId>avro</artifactId>
+		    </exclusion>
+		    
+		    <exclusion>
+			  <groupId>org.apache.directory.server</groupId>
+			  <artifactId>apacheds-kerberos-codec</artifactId>
+		    </exclusion>
+		    
+		    <exclusion>
+			  <groupId>org.codehaus.jackson</groupId>
+			  <artifactId>jackson-mapper-asl</artifactId>
+		    </exclusion>
+		    
+		    <exclusion>
+			  <groupId>org.codehaus.jackson</groupId>
+			  <artifactId>jackson-core-asl</artifactId>
+		    </exclusion>
+		    
+		    <exclusion>
+			  <groupId>org.jruby.jcodings</groupId>
+			  <artifactId>jcodings</artifactId>
+		    </exclusion>
+		    
+		    <exclusion>
+			  <groupId>org.jruby.joni</groupId>
+			  <artifactId>joni</artifactId>
+		    </exclusion>
+		    
+		    <exclusion>
+			  <groupId>com.jcraft</groupId>
+			  <artifactId>jsch</artifactId>
+		    </exclusion>	    
+		   
+		    <exclusion>
+			  <groupId>xmlenc</groupId>
+			  <artifactId>xmlenc</artifactId>
+		    </exclusion>
+		    
+		    <exclusion>
+			  <groupId>org.apache.httpcomponents</groupId>	
+			  <artifactId>httpclient</artifactId>		 
+		    </exclusion>
+		    
+		     <exclusion>
+			  <groupId>org.apache.commons</groupId>	
+			  <artifactId>commons-compress</artifactId>		 
+		    </exclusion>		    		  
+       </exclusions>        
+    </dependency> 
+    
+      <!-- https://mvnrepository.com/artifact/commons-configuration/commons-configuration -->
+    <dependency>
+      <groupId>commons-configuration</groupId>
+      <artifactId>commons-configuration</artifactId>
+      <version>1.10</version>
+    </dependency> 
+    
+    <dependency>
+      <groupId>com.yammer.metrics</groupId>
+      <artifactId>metrics-core</artifactId>
+      <version>2.2.0</version>      
+      <exclusions>
+     	 <exclusion>
+     		<groupId>*</groupId>
+     		<artifactId>*</artifactId>
+     	 </exclusion>     	 
+      </exclusions> 
+      
+    </dependency> 
+        
+    <dependency>  
+      <groupId>jdk.tools</groupId>  
+      <artifactId>jdk.tools</artifactId>  
+      <version>1.7</version>  
+      <scope>system</scope>  
+      <systemPath>D:\Program Files\Java\jdk1.8.0_191\lib\tools.jar</systemPath>  
+    </dependency>     
+    
+  </dependencies>
+    
+  <build> 
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.0.2</version>
+        <configuration>
+        <archive>
+            <manifest>
+                <addClasspath>true</addClasspath>
+                <classpathPrefix>lib/</classpathPrefix>
+                <mainClass>com.shuting.Project_CleanInstrument.CleanInstrument</mainClass>           
+            </manifest>
+        </archive>       
+        </configuration>
+      </plugin>      
+                   
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-shade-plugin</artifactId>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+            <configuration>
+              <transformers>
+                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                  <manifestEntries>
+                    <Main-Class>com.shuting.Project_CleanInstrument.CleanInstrument</Main-Class>
+                  </manifestEntries>
+                </transformer>
+              </transformers>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>            
+      
+      <plugin>         
+        <groupId>org.apache.maven.plugins</groupId>  
+        <artifactId>maven-compiler-plugin</artifactId>  
+        <configuration>  
+        <span style="white-space:pre">    </span><source>1.7</source>  
+        <span style="white-space:pre">    </span><target>1.7</target>  
+        </configuration>  
+      </plugin>      
+      
+    </plugins>
+  </build>    
+  
+</project>
+    
+    

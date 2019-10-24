@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<comment>参数配置</comment>
+<entry key="TimeStamp">2017-11-08-22:19:45#2017-11-09-11:36:16</entry>
+<entry key="PaperXmlPath">profile_id/paper_id.xml</entry>
+<entry key="paperProfileID">0</entry>
+<entry key="Paper2AuthorPath">hdfs:///user/hadoop/Paper2Author</entry>
+<entry key="PersonProfileType">01</entry>
+<entry key="PersonTableFamily">basicInf</entry>
+<entry key="OrgProfile">OrgProfile</entry>
+<entry key="OrgTableIDType">orgID</entry>
+<entry key="paperProfileType">01</entry>
+<entry key="paperTableIDType">paperID</entry>
+<entry key="PersonProfileID">0</entry>
+<entry key="PersonXmlPath">profile_id/person_id.xml</entry>
+<entry key="ProvincePath">hdfs:///user/hadoop/Province.xml</entry>
+<entry key="OrgProfileID">0</entry>
+<entry key="PersonTableIDType">personID</entry>
+<entry key="OrgXmlPath">profile_id/org_id.xml</entry>
+<entry key="TempTable2">Author_22</entry>
+<entry key="TempTable1">Author_11</entry>
+<entry key="OrgProfileType">01</entry>
+<entry key="TempFamily">basicInf,paper</entry>
+<entry key="OrgMapPath">hdfs:///user/hadoop/OrgMap.xml</entry>
+<entry key="OrgTableFamily">basicInf</entry>
+<entry key="paperTable">PAPER</entry>
+<entry key="paperTableFamily">inf</entry>
+<entry key="PersonProfile">PersonProfile</entry>
+</properties>
