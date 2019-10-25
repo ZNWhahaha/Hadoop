@@ -1,4 +1,6 @@
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.transaction.TransactionRequiredException;
 import javax.xml.parsers.DocumentBuilder;
@@ -29,6 +31,9 @@ public class FileControl {
     //inf:time:发表时间
     public static boolean FilexmlAnalysis(String fileName){
         try {
+            //存储重复元素类中重复的个数
+            int num = 0;
+
             //创建DOM解析器工厂
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             //获取解析器对象
@@ -52,18 +57,40 @@ public class FileControl {
                 String sortnumber = element.getElementsByTagName("sortnumber").item(0).getTextContent();
                 String fundsproject = element.getElementsByTagName("fundsproject").item(0).getTextContent();
                 String abstracts = element.getElementsByTagName("abstracts").item(0).getTextContent();
+                String organization = element.getElementsByTagName("organization").item(0).getTextContent();
+
                 //作者需要使用泛型
-                //String autors
+                num = element.getElementsByTagName("autors").getLength();
+                List<String> autors = new ArrayList<String>();
+                for (int j = 0; j < num; j++) {
+                    autors.add(element.getElementsByTagName("autors").item(j).getTextContent());
+                }
 
                 //关键字需要使用泛型
                 //String keyword
-                String organization = element.getElementsByTagName("organization").item(0).getTextContent();
+                num = element.getElementsByTagName("keyword").getLength();
+                List<String> keyword = new ArrayList<String>();
+                for (int j = 0; j < num; j++) {
+                    autors.add(element.getElementsByTagName("keyword").item(j).getTextContent());
+                }
+
 
                 //出版社需要泛型
                 //String publishinghouse
+                num = element.getElementsByTagName("publishinghouse").getLength();
+                List<String> publishinghouse = new ArrayList<String>();
+                for (int j = 0; j < num; j++) {
+                    autors.add(element.getElementsByTagName("publishinghouse").item(j).getTextContent());
+                }
 
                 //index需要泛型
                 //String index
+                num = element.getElementsByTagName("index").getLength();
+                List<String> index = new ArrayList<String>();
+                for (int j = 0; j < num; j++) {
+                    autors.add(element.getElementsByTagName("index").item(j).getTextContent());
+                }
+
                 //测试用
                 //System.out.println("论文: " + title +"  "+ time + "  " + sortnumber + "  " + fundsproject + "  " + abstracts);
             }
