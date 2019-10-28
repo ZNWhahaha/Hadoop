@@ -14,7 +14,9 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-
+//编写自定义mr程序，在从hdfs中获取到每一个xml文件，将文件作为mapper的输入，对在mapper中对每一个xml文件进行解析
+//并把解析结果提交的Reduce阶段，Reduce阶段负责将解析出来的结果传至hbase数据库中、
+//程序运行先决条件：已创建好Hbase表，或将建立Hbase表的步骤放至前一步文件上传HDFS程序
 public class FileControl {
 
     //用于解析论文数据集中的xml文件，并将解析后的数据内容存放至hbase数据表中：

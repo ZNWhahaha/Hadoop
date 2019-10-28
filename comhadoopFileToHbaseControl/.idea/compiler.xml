@@ -6,8 +6,8 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="comhadoopFileToHbaseControl" />
         <module name="com.hadoop.FileToHbaseControl" />
+        <module name="comhadoopFileToHbaseControl" />
       </profile>
     </annotationProcessing>
   </component>
