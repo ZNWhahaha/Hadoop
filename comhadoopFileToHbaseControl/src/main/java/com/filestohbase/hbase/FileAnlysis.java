@@ -24,8 +24,8 @@ import org.apache.hadoop.hbase.client.Put;
 public class FileAnlysis {
 
     //通过文件路径来对XML文件进行解析
-    private static HbaseItem FilexmlAnalysis(String filePath){
-        HbaseItem hItem = new HbaseItem();
+    private static HbaseItem FilexmlAnalysis(String filePath,HbaseItem hItem){
+
         try {
 
             //存储重复元素类中重复的个数
@@ -133,7 +133,7 @@ public class FileAnlysis {
             HTable HBasetable = new HTable(HBASE_CONFIG,TableName.valueOf(tableName));
 
             List<Put> puts = new ArrayList<Put>();
-            Put put1 =  new Put(key.getBytes());
+            Put put1 = new Put(key.getBytes());
             put1.add(Bytes.toBytes("colfaml"),Bytes.toBytes("qual1"),Bytes.toBytes("val1"));
             puts.add(put1);
 
@@ -177,6 +177,7 @@ public class FileAnlysis {
         return  filepath;
     }
 
+
     //控制整个程序的运行
     //mian函数的输入参数为 0：文件夹的位置  1：操作的Hbase表的名称  2：对于文件夹切分的块的大小
     public static void main(String[] args){
@@ -187,14 +188,12 @@ public class FileAnlysis {
 //        }
         String TableName = args[1];
         List<String> filepath = XMLFilePath(args[0]);
-        List<HbaseItem> hbaseitoms = new ArrayList<HbaseItem>();
+        HbaseItem hbaseitom  = new HbaseItem();
+        //通过只new一个HbaseItem对象，减少系统的内存开销，
         //通过文件路径对每个文件进行处理
         for (int i = 0; i < filepath.size(); i++) {
-            hbaseitoms.add(FilexmlAnalysis(filepath.get(i)));
-        }
-        //将处理好的HbaseItem存入Hbase数据库中
-        for (int i = 0; i < hbaseitoms.size(); i++) {
-            FileToHbase(TableName,hbaseitoms.get(i));
+            FilexmlAnalysis(filepath.get(i),hbaseitom);
+            FileToHbase(TableName,hbaseitom);
         }
     }
 }
