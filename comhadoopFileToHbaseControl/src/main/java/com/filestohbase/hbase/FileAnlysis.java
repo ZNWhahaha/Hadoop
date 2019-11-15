@@ -55,35 +55,30 @@ public class FileAnlysis {
                 hItem.fundsproject = element.getElementsByTagName("fundsproject").item(0).getTextContent();
                 hItem.abstracts = element.getElementsByTagName("abstracts").item(0).getTextContent();
                 hItem.organization = element.getElementsByTagName("organization").item(0).getTextContent();
+                hItem.paperid = element.getElementsByTagName("paperid").item(0).getTextContent();
 
-                //作者需要使用泛型
                 num = element.getElementsByTagName("autors").getLength();
                 for (int j = 0; j < num; j++) {
-                    hItem.autors.add(element.getElementsByTagName("autors").item(j).getTextContent());
+                    hItem.autors += "," + element.getElementsByTagName("autors").item(j).getTextContent();
                 }
 
-                //关键字需要使用泛型
                 //String keyword
                 num = element.getElementsByTagName("keyword").getLength();
                 for (int j = 0; j < num; j++) {
-                    hItem.keyword.add(element.getElementsByTagName("keyword").item(j).getTextContent());
+                    hItem.keyword += ","+element.getElementsByTagName("keyword").item(j).getTextContent();
                 }
 
 
-                //出版社需要泛型
                 //String publishinghouse
                 num = element.getElementsByTagName("publishinghouse").getLength();
-                List<String> publishinghouse = new ArrayList<String>();
                 for (int j = 0; j < num; j++) {
-                    hItem.publishinghouse.add(element.getElementsByTagName("publishinghouse").item(j).getTextContent());
+                    hItem.publishinghouse += ","+element.getElementsByTagName("publishinghouse").item(j).getTextContent();
                 }
 
-                //index需要泛型
                 //String index
                 num = element.getElementsByTagName("index").getLength();
-                List<String> index = new ArrayList<String>();
                 for (int j = 0; j < num; j++) {
-                    hItem.index.add(element.getElementsByTagName("index").item(j).getTextContent());
+                    hItem.index += ","+element.getElementsByTagName("index").item(j).getTextContent();
                 }
 
                 //测试用
@@ -99,7 +94,7 @@ public class FileAnlysis {
         return hItem;
     }
 
-    //对于所存入泛型的HbaseItem内的数据进行处理，放入到hbase数据库中
+    //对于所存入的HbaseItem内的数据进行处理，放入到hbase数据库中
     private static boolean FileToHbase(String tableName,HbaseItem hitem){
 
 
@@ -126,24 +121,53 @@ public class FileAnlysis {
 //        hBaseAdmin.createTable(htd);
 //        hBaseAdmin.close();
             String key = hitem.title;
-            String family1 = "";
-            String family2 = "";
-            String family3 = "";
 
             HTable HBasetable = new HTable(HBASE_CONFIG,TableName.valueOf(tableName));
-
+            //指定每个keyrow
             List<Put> puts = new ArrayList<Put>();
+
+            //批量向Hbase中添加内容
             Put put1 = new Put(key.getBytes());
-            put1.add(Bytes.toBytes("colfaml"),Bytes.toBytes("qual1"),Bytes.toBytes("val1"));
+            put1.add(Bytes.toBytes("inf"),Bytes.toBytes("fundsproject"),Bytes.toBytes(hitem.fundsproject));
             puts.add(put1);
 
             Put put2 =  new Put(key.getBytes());
-            put2.add(Bytes.toBytes("colfam2"),Bytes.toBytes("qual2"),Bytes.toBytes("val2"));
+            put2.add(Bytes.toBytes("inf"),Bytes.toBytes("indexs"),Bytes.toBytes(hitem.index));
             puts.add(put2);
 
             Put put3 =  new Put(key.getBytes());
-            put3.add(Bytes.toBytes("colfam1"),Bytes.toBytes("qual2"),Bytes.toBytes("val3"));
+            put3.add(Bytes.toBytes("inf"),Bytes.toBytes("keywords"),Bytes.toBytes(hitem.keyword));
             puts.add(put3);
+
+            Put put4 =  new Put(key.getBytes());
+            put4.add(Bytes.toBytes("inf"),Bytes.toBytes("paperID"),Bytes.toBytes(hitem.paperid));
+            puts.add(put4);
+
+
+            //iii
+            Put put5 =  new Put(key.getBytes());
+            put5.add(Bytes.toBytes("inf"),Bytes.toBytes("publishinghouse"),Bytes.toBytes(hitem.publishinghouse));
+            puts.add(put5);
+
+            Put put6 =  new Put(key.getBytes());
+            put6.add(Bytes.toBytes("inf"),Bytes.toBytes("sortnumber"),Bytes.toBytes(hitem.sortnumber));
+            puts.add(put6);
+
+            Put put7 =  new Put(key.getBytes());
+            put7.add(Bytes.toBytes("inf"),Bytes.toBytes("time"),Bytes.toBytes(hitem.time));
+            puts.add(put7);
+
+            Put put8 =  new Put(key.getBytes());
+            put8.add(Bytes.toBytes("authors"),Bytes.toBytes(hitem.autors),Bytes.toBytes(hitem.time));
+            puts.add(put8);
+
+            Put put9 =  new Put(key.getBytes());
+            put9.add(Bytes.toBytes("inf"),Bytes.toBytes("abstracts"),Bytes.toBytes(hitem.abstracts));
+            puts.add(put9);
+
+            Put put10 =  new Put(key.getBytes());
+            put10.add(Bytes.toBytes("inf"),Bytes.toBytes("isFilter"),Bytes.toBytes("true"));
+            puts.add(put10);
 
             HBasetable.put(puts);
             HBasetable.close();

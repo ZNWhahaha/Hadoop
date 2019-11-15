@@ -22,19 +22,52 @@ public class HbaseItem {
     String fundsproject;
     String abstracts;
     String organization;
-    List<String> autors;
-    List<String> publishinghouse;
-    List<String> index;
+    String paperid;
+    String keyword;
 
-    public List<String> getKeyword() {
+    public String getKeyword() {
         return keyword;
     }
 
-    public void setKeyword(List<String> keyword) {
+    public void setKeyword(String keyword) {
         this.keyword = keyword;
     }
 
-    List<String> keyword;
+    public String getAutors() {
+        return autors;
+    }
+
+    public void setAutors(String autors) {
+        this.autors = autors;
+    }
+
+    public String getPublishinghouse() {
+        return publishinghouse;
+    }
+
+    public void setPublishinghouse(String publishinghouse) {
+        this.publishinghouse = publishinghouse;
+    }
+
+    public String getIndex() {
+        return index;
+    }
+
+    public void setIndex(String index) {
+        this.index = index;
+    }
+
+    String autors;
+    String publishinghouse;
+    String index;
+
+    public String getPaperid() {
+        return paperid;
+    }
+
+    public void setPaperid(String paperid) {
+        this.paperid = paperid;
+    }
 
     public String getTitle() {
         return title;
@@ -85,28 +118,6 @@ public class HbaseItem {
         this.organization = organization;
     }
 
-    public List<String> getAutors() {
-        return autors;
-    }
 
-    public void setAutors(List<String> autors) {
-        this.autors = autors;
-    }
-
-    public List<String> getPublishinghouse() {
-        return publishinghouse;
-    }
-
-    public void setPublishinghouse(List<String> publishinghouse) {
-        this.publishinghouse = publishinghouse;
-    }
-
-    public List<String> getIndex() {
-        return index;
-    }
-
-    public void setIndex(List<String> index) {
-        this.index = index;
-    }
 
 }
