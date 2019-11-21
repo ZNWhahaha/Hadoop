@@ -1,7 +1,9 @@
 package com.filestohbase.hbase;
 
 import org.apache.hadoop.hbase.*;
+import org.apache.hadoop.hbase.client.*;
 import org.apache.hadoop.hbase.util.Bytes;
+import org.junit.Before;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -17,22 +19,44 @@ import java.util.List;
 import java.io.*;
 
 import org.apache.hadoop.conf.Configuration;
-import org.apache.hadoop.hbase.client.HBaseAdmin;
-import org.apache.hadoop.hbase.client.HTable;
-import org.apache.hadoop.hbase.client.Put;
 
 public class FileAnlysis {
 
+    public static Configuration configuration;
+    public static Connection connection;
+    public static Admin admin;
+
+  	public static void init(){
+        configuration = HBaseConfiguration.create();
+//        try {
+////            //第一步，设置HBsae配置信息
+////            configuration = HBaseConfiguration.create();
+////            connection = ConnectionFactory.createConnection(configuration);
+////            admin = connection.getAdmin();
+////            if(admin !=null){
+////                //获取到数据库所有表信息
+////                System.out.println("没有获取到Hbase数据库中的信息");
+////                HTableDescriptor[] allTable = admin.listTables();
+////                for (HTableDescriptor hTableDescriptor : allTable) {
+////                    System.out.println(hTableDescriptor.getNameAsString());
+////                }
+////            }
+////        }catch (IOException e){
+////            e.printStackTrace();
+////        }
+ 	}
+
     //通过文件路径来对XML文件进行解析
     private static HbaseItem FilexmlAnalysis(String filePath,HbaseItem hItem){
-
+        //检查出的问题。若读取xml表时，无标签，则会报错
         try {
 
             //存储重复元素类中重复的个数
             int num = 0;
-
+            System.out.println("创建DOM解析器工厂");
             //创建DOM解析器工厂
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+            System.out.println("获取解析器对象");
             //获取解析器对象
             DocumentBuilder db = dbf.newDocumentBuilder();
             //调用DOM解析器对象paerse（string uri）方法得到Document对象
@@ -41,7 +65,7 @@ public class FileAnlysis {
             NodeList nl = doc.getElementsByTagName("Document");
 //            if (nl.getLength() == 0)
 //                return false;
-
+            System.out.println(nl.getLength());
             //遍历XML文件中的各个元素
             for (int i = 0; i < nl.getLength(); i++) {
                 //得到Nodelist中的Node对象
@@ -49,19 +73,33 @@ public class FileAnlysis {
                 //强制转化得到Element对象
                 Element element = (Element) node;
                 //获取各个元素的属性值
+                System.out.println("Title "+ element.getElementsByTagName("title").item(0).getTextContent());
+                System.out.println("time "+element.getElementsByTagName("time").item(0).getTextContent());
+                System.out.println("sortnumber "+element.getElementsByTagName("sortnumber").item(0).getTextContent());
+                System.out.println("fundsproject "+element.getElementsByTagName("fundsproject").item(0).getTextContent());
+                //System.out.println("abstracts"+element.getElementsByTagName("abstracts").item(0).getTextContent());
+                System.out.println("开始存储");
                 hItem.title = element.getElementsByTagName("title").item(0).getTextContent();
+                System.out.println("存储title成功");
                 hItem.time = element.getElementsByTagName("time").item(0).getTextContent();
+                System.out.println("存储time成功");
                 hItem.sortnumber = element.getElementsByTagName("sortnumber").item(0).getTextContent();
+                System.out.println("存储sortnumber成功");
                 hItem.fundsproject = element.getElementsByTagName("fundsproject").item(0).getTextContent();
-                hItem.abstracts = element.getElementsByTagName("abstracts").item(0).getTextContent();
+                System.out.println("存储fundsproject成功");
+                if("abstracts".equals(element.getElementsByTagName("abstracts"))){
+                    hItem.abstracts = element.getElementsByTagName("abstracts").item(0).getTextContent();
+                }
+
+                System.out.println("存储abstracts成功");
                 hItem.organization = element.getElementsByTagName("organization").item(0).getTextContent();
                 hItem.paperid = element.getElementsByTagName("paperid").item(0).getTextContent();
-
+                System.out.println("处理多数据");
                 num = element.getElementsByTagName("autors").getLength();
                 for (int j = 0; j < num; j++) {
                     hItem.autors += "," + element.getElementsByTagName("autors").item(j).getTextContent();
                 }
-
+                System.out.println("authors   " +  hItem.autors);
                 //String keyword
                 num = element.getElementsByTagName("keyword").getLength();
                 for (int j = 0; j < num; j++) {
@@ -82,7 +120,7 @@ public class FileAnlysis {
                 }
 
                 //测试用
-                //System.out.println("论文: " + title +"  "+ time + "  " + sortnumber + "  " + fundsproject + "  " + abstracts);
+                System.out.println("论文: " + hItem.title +"  "+ hItem.time + "  " + hItem.index + "  " + hItem.autors + "  " + hItem.abstracts);
             }
         }catch (ParserConfigurationException e){
             e.printStackTrace();
@@ -97,32 +135,12 @@ public class FileAnlysis {
     //对于所存入的HbaseItem内的数据进行处理，放入到hbase数据库中
     private static boolean FileToHbase(String tableName,HbaseItem hitem){
 
-
-
         try {
-            Configuration HBASE_CONFIG = new Configuration();
-
-//        //建表所用到的代码
-//        //HBASE_CONFIG.set("hbase.zookeeper.quorum", "");
-//
-//        String tableName = "";
-//        String family="";
-//        HBaseAdmin hBaseAdmin = new HBaseAdmin(HBASE_CONFIG);
-//
-//        if (hBaseAdmin.tableExists(tableName)) {
-//            hBaseAdmin.disableTable(tableName);
-//            hBaseAdmin.deleteTable(tableName);
-//            System.out.println(tableName + " is exist,detele....");
-//        }
-//
-//        HTableDescriptor htd = new HTableDescriptor(TableName.valueOf(tableName));
-//        HColumnDescriptor cf= new HColumnDescriptor(family);
-//        htd.addFamily(cf);
-//        hBaseAdmin.createTable(htd);
-//        hBaseAdmin.close();
             String key = hitem.title;
+            HTable table = new HTable(configuration, TableName.valueOf(tableName));
 
-            HTable HBasetable = new HTable(HBASE_CONFIG,TableName.valueOf(tableName));
+
+            //Table table = connection.getTable(TableName.valueOf(tableName));
             //指定每个keyrow
             List<Put> puts = new ArrayList<Put>();
 
@@ -169,8 +187,8 @@ public class FileAnlysis {
             put10.add(Bytes.toBytes("inf"),Bytes.toBytes("isFilter"),Bytes.toBytes("true"));
             puts.add(put10);
 
-            HBasetable.put(puts);
-            HBasetable.close();
+            table.put(puts);
+            table.close();
         }catch (IOException e){
             e.printStackTrace();
         }
@@ -203,21 +221,28 @@ public class FileAnlysis {
 
 
     //控制整个程序的运行
-    //mian函数的输入参数为 0：文件夹的位置  1：操作的Hbase表的名称  2：对于文件夹切分的块的大小
+    //mian函数的输入参数为 0：文件夹的位置  1：操作的Hbase表的名称
     public static void main(String[] args){
 //        //测试用
-//        List<String> filepath = XMLFilePath("E:\\学习资料\\科技厅项目\\科技大数据项目\\spmary0828");
+//        List<String> filepath = XMLFilePath(args[0]);
 //        for(String path : filepath){
 //            System.out.println(path);
 //        }
+        //初始化链接Hbase
         String TableName = args[1];
+        System.out.println("初始化链接到数据库中");
+        init();
         List<String> filepath = XMLFilePath(args[0]);
-        HbaseItem hbaseitom  = new HbaseItem();
+        //HbaseItem hbaseitom  = new HbaseItem();
+        System.out.println("开始处理数据");
+        System.out.println(filepath.size());
         //通过只new一个HbaseItem对象，减少系统的内存开销，
         //通过文件路径对每个文件进行处理
         for (int i = 0; i < filepath.size(); i++) {
-            FilexmlAnalysis(filepath.get(i),hbaseitom);
-            FileToHbase(TableName,hbaseitom);
+            System.out.println(filepath.get(i));
+            HbaseItem hbaseitem  = new HbaseItem();
+            FilexmlAnalysis(filepath.get(i),hbaseitem);
+            FileToHbase(TableName,hbaseitem);
         }
     }
 }
