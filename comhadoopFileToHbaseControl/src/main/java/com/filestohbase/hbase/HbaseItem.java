@@ -16,14 +16,17 @@ import java.util.List;
 //inf:time:发表时间
 public class HbaseItem {
 
-    String title;
-    String time;
-    String sortnumber;
-    String fundsproject;
-    String abstracts;
-    String organization;
-    String paperid;
-    String keyword;
+    public String title = "";
+    public String time = "";
+    public String sortnumber = "";
+    public String fundsproject = "";
+    public String abstracts = "";
+    public String organization = "";
+    public String paperid = "";
+    public String keyword = "";
+    public String autors = "";
+    public String publishinghouse = "";
+    public String index = "";
 
     public String getKeyword() {
         return keyword;
@@ -57,9 +60,7 @@ public class HbaseItem {
         this.index = index;
     }
 
-    String autors;
-    String publishinghouse;
-    String index;
+
 
     public String getPaperid() {
         return paperid;

@@ -23,8 +23,8 @@ import org.apache.hadoop.conf.Configuration;
 public class FileAnlysis {
 
     public static Configuration configuration;
-    public static Connection connection;
-    public static Admin admin;
+//    public static Connection connection;
+//    public static Admin admin;
 
   	public static void init(){
         configuration = HBaseConfiguration.create();
@@ -47,8 +47,10 @@ public class FileAnlysis {
  	}
 
     //通过文件路径来对XML文件进行解析
-    private static HbaseItem FilexmlAnalysis(String filePath,HbaseItem hItem){
-        //检查出的问题。若读取xml表时，无标签，则会报错
+    private static HbaseItem FilexmlAnalysis(String filePath){
+
+        HbaseItem hItem = new HbaseItem();
+  	    //检查出的问题。若读取xml表时，无标签，则会报错
         try {
 
             //存储重复元素类中重复的个数
@@ -72,55 +74,126 @@ public class FileAnlysis {
                 Node node = nl.item(i);
                 //强制转化得到Element对象
                 Element element = (Element) node;
+
+
                 //获取各个元素的属性值
-                System.out.println("Title "+ element.getElementsByTagName("title").item(0).getTextContent());
-                System.out.println("time "+element.getElementsByTagName("time").item(0).getTextContent());
-                System.out.println("sortnumber "+element.getElementsByTagName("sortnumber").item(0).getTextContent());
-                System.out.println("fundsproject "+element.getElementsByTagName("fundsproject").item(0).getTextContent());
-                //System.out.println("abstracts"+element.getElementsByTagName("abstracts").item(0).getTextContent());
-                System.out.println("开始存储");
-                hItem.title = element.getElementsByTagName("title").item(0).getTextContent();
-                System.out.println("存储title成功");
-                hItem.time = element.getElementsByTagName("time").item(0).getTextContent();
-                System.out.println("存储time成功");
-                hItem.sortnumber = element.getElementsByTagName("sortnumber").item(0).getTextContent();
-                System.out.println("存储sortnumber成功");
-                hItem.fundsproject = element.getElementsByTagName("fundsproject").item(0).getTextContent();
-                System.out.println("存储fundsproject成功");
-                if("abstracts".equals(element.getElementsByTagName("abstracts"))){
-                    hItem.abstracts = element.getElementsByTagName("abstracts").item(0).getTextContent();
+                System.out.println("开始传递数据");
+//                System.out.println(element.getElementsByTagName("title"));
+//                System.out.println(element.getElementsByTagName("time"));
+//                System.out.println(element.getElementsByTagName("sortnumber"));
+//                System.out.println(element.getElementsByTagName("fundsproject"));
+//                System.out.println(element.getElementsByTagName("abstracts"));
+//                System.out.println(element.getElementsByTagName("organization"));
+//                System.out.println(element.getElementsByTagName("paperid"));
+//                System.out.println(element.getElementsByTagName("autors"));
+//                System.out.println(element.getElementsByTagName("keyword"));
+//                System.out.println(element.getElementsByTagName("publishinghouse"));
+//                System.out.println(element.getElementsByTagName("index"));
+
+
+                if(element.getElementsByTagName("title").getLength() != 0){
+
+                    hItem.setTitle(element.getElementsByTagName("title").item(0).getTextContent());
+                    System.out.println("传递title成功 "+ "("+hItem.getTitle()+")" +element.getElementsByTagName("title").item(0).getTextContent());
                 }
 
-                System.out.println("存储abstracts成功");
-                hItem.organization = element.getElementsByTagName("organization").item(0).getTextContent();
-                hItem.paperid = element.getElementsByTagName("paperid").item(0).getTextContent();
+
+
+                if(element.getElementsByTagName("time").getLength() != 0){
+                    hItem.time = element.getElementsByTagName("time").item(0).getTextContent();
+                    System.out.println("传递time成功 "+ "("+hItem.time+")" +element.getElementsByTagName("time").item(0).getTextContent());
+                }
+
+
+                if(element.getElementsByTagName("sortnumber").getLength() != 0){
+                    hItem.sortnumber = element.getElementsByTagName("sortnumber").item(0).getTextContent();
+                    System.out.println("传递sortnumber成功  " + "("+hItem.sortnumber+")"+ element.getElementsByTagName("sortnumber").item(0).getTextContent());
+                }
+
+
+                if(element.getElementsByTagName("fundsproject").getLength() != 0){
+                    hItem.fundsproject = element.getElementsByTagName("fundsproject").item(0).getTextContent();
+                    System.out.println("传递fundsproject成功  "+ "("+hItem.fundsproject+")" + element.getElementsByTagName("fundsproject").item(0).getTextContent());
+                }
+
+
+                if(element.getElementsByTagName("abstracts").getLength() != 0){
+                    hItem.abstracts = element.getElementsByTagName("abstracts").item(0).getTextContent();
+                    System.out.println("传递fundsproject成功  "+ "("+hItem.fundsproject+")" + element.getElementsByTagName("fundsproject").item(0).getTextContent());
+                }
+
+
+                if(element.getElementsByTagName("organization").getLength() != 0){
+                    System.out.println("传递fundsproject成功  "+ "("+hItem.fundsproject+")" + element.getElementsByTagName("fundsproject").item(0).getTextContent());
+                }
+                    hItem.organization = element.getElementsByTagName("organization").item(0).getTextContent();
+
+                if(element.getElementsByTagName("paperid").getLength() != 0){
+
+                }
+                    hItem.paperid = element.getElementsByTagName("paperid").item(0).getTextContent();
+
                 System.out.println("处理多数据");
-                num = element.getElementsByTagName("autors").getLength();
-                for (int j = 0; j < num; j++) {
-                    hItem.autors += "," + element.getElementsByTagName("autors").item(j).getTextContent();
+
+                if(element.getElementsByTagName("autors").getLength() != 0){
+                    num = element.getElementsByTagName("autors").getLength();
+                    for (int j = 0; j < num; j++) {
+
+                        if (j == 0) {
+                            hItem.autors = element.getElementsByTagName("autors").item(j).getTextContent();
+                        }else {
+                            hItem.autors += "," + element.getElementsByTagName("autors").item(j).getTextContent();
+                        }
+                    }
+                    System.out.println("传递fundsproject成功  "+ "("+hItem.fundsproject+")" + element.getElementsByTagName("fundsproject").item(0).getTextContent());
                 }
-                System.out.println("authors   " +  hItem.autors);
+
                 //String keyword
-                num = element.getElementsByTagName("keyword").getLength();
-                for (int j = 0; j < num; j++) {
-                    hItem.keyword += ","+element.getElementsByTagName("keyword").item(j).getTextContent();
+                if(element.getElementsByTagName("keyword").getLength() != 0){
+                    num = element.getElementsByTagName("keyword").getLength();
+                    for (int j = 0; j < num; j++) {
+                        if (j == 0) {
+                            hItem.keyword = element.getElementsByTagName("keyword").item(j).getTextContent();
+                        }else {
+                            hItem.keyword += ","+element.getElementsByTagName("keyword").item(j).getTextContent();
+                        }
+
+                    }
+                    System.out.println("传递fundsproject成功  "+ "("+hItem.fundsproject+")" + element.getElementsByTagName("fundsproject").item(0).getTextContent());
                 }
+
 
 
                 //String publishinghouse
-                num = element.getElementsByTagName("publishinghouse").getLength();
-                for (int j = 0; j < num; j++) {
-                    hItem.publishinghouse += ","+element.getElementsByTagName("publishinghouse").item(j).getTextContent();
+                if(element.getElementsByTagName("publishinghouse").getLength() != 0){
+                    num = element.getElementsByTagName("publishinghouse").getLength();
+                    for (int j = 0; j < num; j++) {
+                        if (j == 0) {
+                            hItem.publishinghouse = element.getElementsByTagName("publishinghouse").item(j).getTextContent();
+                        }else {
+                            hItem.publishinghouse += ","+element.getElementsByTagName("publishinghouse").item(j).getTextContent();
+                        }
+                    }
+                    System.out.println("传递fundsproject成功  "+ "("+hItem.fundsproject+")" + element.getElementsByTagName("fundsproject").item(0).getTextContent());
                 }
+
 
                 //String index
-                num = element.getElementsByTagName("index").getLength();
-                for (int j = 0; j < num; j++) {
-                    hItem.index += ","+element.getElementsByTagName("index").item(j).getTextContent();
+                if(element.getElementsByTagName("index").getLength() != 0){
+                    num = element.getElementsByTagName("index").getLength();
+                    for (int j = 0; j < num; j++) {
+                        if (j == 0) {
+                            hItem.index = element.getElementsByTagName("index").item(j).getTextContent();
+                        }else {
+                            hItem.index += ","+element.getElementsByTagName("index").item(j).getTextContent();
+                        }
+
+                    }
                 }
 
+
                 //测试用
-                System.out.println("论文: " + hItem.title +"  "+ hItem.time + "  " + hItem.index + "  " + hItem.autors + "  " + hItem.abstracts);
+//                System.out.println("论文: " +hItem.title+"  "+ hItem.time + "  " + hItem.index + "  " + hItem.index + "  " + hItem.abstracts);
             }
         }catch (ParserConfigurationException e){
             e.printStackTrace();
@@ -134,9 +207,12 @@ public class FileAnlysis {
 
     //对于所存入的HbaseItem内的数据进行处理，放入到hbase数据库中
     private static boolean FileToHbase(String tableName,HbaseItem hitem){
-
+        if (hitem.autors.equals("") || hitem.abstracts.equals("")){
+            return false;
+        }
         try {
-            String key = hitem.title;
+
+            String key = hitem.getTitle();
             HTable table = new HTable(configuration, TableName.valueOf(tableName));
 
 
@@ -162,7 +238,6 @@ public class FileAnlysis {
             puts.add(put4);
 
 
-            //iii
             Put put5 =  new Put(key.getBytes());
             put5.add(Bytes.toBytes("inf"),Bytes.toBytes("publishinghouse"),Bytes.toBytes(hitem.publishinghouse));
             puts.add(put5);
@@ -228,6 +303,9 @@ public class FileAnlysis {
 //        for(String path : filepath){
 //            System.out.println(path);
 //        }
+        String a = "";
+        a = "hahaha";
+        System.out.println(a);
         //初始化链接Hbase
         String TableName = args[1];
         System.out.println("初始化链接到数据库中");
@@ -240,9 +318,9 @@ public class FileAnlysis {
         //通过文件路径对每个文件进行处理
         for (int i = 0; i < filepath.size(); i++) {
             System.out.println(filepath.get(i));
-            HbaseItem hbaseitem  = new HbaseItem();
-            FilexmlAnalysis(filepath.get(i),hbaseitem);
-            FileToHbase(TableName,hbaseitem);
+
+            System.out.println("开始向HBase数据库传输数据");
+            FileToHbase(TableName,FilexmlAnalysis(filepath.get(i)));
         }
     }
 }

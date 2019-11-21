@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="823368b1-7da2-42cb-beaa-096db8ba3793" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/com_hadoop_FileToHbaseControl_jar/com.hadoop.FileToHbaseControl.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/com_hadoop_FileToHbaseControl_jar/com.hadoop.FileToHbaseControl.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/filestohbase/hbase/FileAnlysis.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filestohbase/hbase/FileAnlysis.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/FileControl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/filestohbase/hbase/HbaseItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filestohbase/hbase/HbaseItem.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -18,8 +18,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/filestohbase/hbase/HbaseItem.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="825">
-              <caret line="25" column="19" selection-start-line="25" selection-start-column="19" selection-end-line="25" selection-end-column="19" />
+            <state relative-caret-position="297">
+              <caret line="18" column="10" selection-start-line="18" selection-start-column="10" selection-end-line="18" selection-end-column="10" />
             </state>
           </provider>
         </entry>
@@ -27,8 +27,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/filestohbase/hbase/FileAnlysis.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="90" column="105" selection-start-line="90" selection-start-column="105" selection-end-line="90" selection-end-column="105" />
+            <state relative-caret-position="529">
+              <caret line="27" lean-forward="true" selection-start-line="27" selection-end-line="27" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -53,8 +53,8 @@
       <list>
         <option value="$PROJECT_DIR$/src/main/java/FileControl.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/hbase/hadoop/FileAnalysis.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/filestohbase/hbase/HbaseItem.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/filestohbase/hbase/HbaseItem.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/filestohbase/hbase/FileAnlysis.java" />
       </list>
     </option>
@@ -80,7 +80,7 @@
       <select />
     </treeState>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
     <option name="width" value="1936" />
@@ -200,12 +200,12 @@
       <workItem from="1573784222390" duration="2034000" />
       <workItem from="1573786292259" duration="599000" />
       <workItem from="1574314418858" duration="3742000" />
-      <workItem from="1574318192507" duration="5872000" />
+      <workItem from="1574318192507" duration="12759000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="40461000" />
+    <option name="totallyTimeSpent" value="47348000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -237,7 +237,7 @@
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Terminal" order="10" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" weight="0.32952183" />
-      <window_info anchor="bottom" id="Messages" order="12" visible="true" weight="0.21101871" />
+      <window_info anchor="bottom" id="Messages" order="12" visible="true" weight="0.08627859" />
       <window_info anchor="bottom" id="Java Enterprise" order="13" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -316,13 +316,6 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/FileControl.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/HbaseItem.java" />
     <entry file="file://$PROJECT_DIR$/target/classes/FileControl.class" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/filestohbase/hbase/HbaseItem.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="825">
-          <caret line="25" column="19" selection-start-line="25" selection-start-column="19" selection-end-line="25" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/META-INF/MANIFEST.MF">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="486">
@@ -351,10 +344,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/filestohbase/hbase/HbaseItem.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="297">
+          <caret line="18" column="10" selection-start-line="18" selection-start-column="10" selection-end-line="18" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/filestohbase/hbase/FileAnlysis.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="90" column="105" selection-start-line="90" selection-start-column="105" selection-end-line="90" selection-end-column="105" />
+        <state relative-caret-position="529">
+          <caret line="27" lean-forward="true" selection-start-line="27" selection-end-line="27" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
