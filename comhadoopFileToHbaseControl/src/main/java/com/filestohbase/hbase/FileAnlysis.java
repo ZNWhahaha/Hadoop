@@ -262,6 +262,7 @@ public class FileAnlysis {
             put10.add(Bytes.toBytes("inf"),Bytes.toBytes("isFilter"),Bytes.toBytes("true"));
             puts.add(put10);
 
+
             table.put(puts);
             table.close();
         }catch (IOException e){
@@ -304,7 +305,7 @@ public class FileAnlysis {
 //            System.out.println(path);
 //        }
         String a = "";
-        a = "hahaha";
+        a = "Strat put files from xml to hbase";
         System.out.println(a);
         //初始化链接Hbase
         String TableName = args[1];
