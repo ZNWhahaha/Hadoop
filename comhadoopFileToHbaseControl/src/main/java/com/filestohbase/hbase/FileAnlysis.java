@@ -297,7 +297,7 @@ public class FileAnlysis {
 
 
     //控制整个程序的运行
-    //mian函数的输入参数为 0：文件夹的位置  1：操作的Hbase表的名称
+    //mian函数的输入参数为 0：文件夹的位置  1：操作的Hbase表的名称  2：输出的log文件的存储路径
     public static void main(String[] args){
 //        //测试用
 //        List<String> filepath = XMLFilePath(args[0]);
