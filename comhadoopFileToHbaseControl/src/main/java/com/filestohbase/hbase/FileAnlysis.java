@@ -10,6 +10,9 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import javax.mail.Message;
+import javax.mail.Session;
+import javax.mail.Transport;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -17,14 +20,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.io.*;
+import java.util.Properties;
 
 import org.apache.hadoop.conf.Configuration;
 
 public class FileAnlysis {
 
     public static Configuration configuration;
-//    public static Connection connection;
-//    public static Admin admin;
 
   	public static void init(){
         configuration = HBaseConfiguration.create();
@@ -78,17 +80,6 @@ public class FileAnlysis {
 
                 //获取各个元素的属性值
                 System.out.println("开始传递数据");
-//                System.out.println(element.getElementsByTagName("title"));
-//                System.out.println(element.getElementsByTagName("time"));
-//                System.out.println(element.getElementsByTagName("sortnumber"));
-//                System.out.println(element.getElementsByTagName("fundsproject"));
-//                System.out.println(element.getElementsByTagName("abstracts"));
-//                System.out.println(element.getElementsByTagName("organization"));
-//                System.out.println(element.getElementsByTagName("paperid"));
-//                System.out.println(element.getElementsByTagName("autors"));
-//                System.out.println(element.getElementsByTagName("keyword"));
-//                System.out.println(element.getElementsByTagName("publishinghouse"));
-//                System.out.println(element.getElementsByTagName("index"));
 
 
                 if(element.getElementsByTagName("title").getLength() != 0){
@@ -295,27 +286,64 @@ public class FileAnlysis {
         return  filepath;
     }
 
+    //发送邮件方法
+    public static void Tomail(SendEmail sendemail,String mailtext){
+        sendemail.mailFrom = "InformError@163.com";
+        sendemail.password_mailFrom="NLP111111";
+        sendemail.mailTo = "InformError@163.com";
+        sendemail.mailTittle="ERROR !!!";
+        sendemail.mailText = "test";
+        sendemail.mail_host="smtp.163.com";
+
+        try {
+            Properties prop = new Properties();
+            prop.setProperty("mail.host", sendemail.mail_host);
+            prop.setProperty("mail.transport.protocol", "smtp");
+            prop.setProperty("mail.smtp.auth", "true");
+
+            // 使用JavaMail发送邮件的5个步骤
+
+            // 1、创建session
+            Session session = Session.getInstance(prop);
+            // 开启Session的debug模式，这样就可以查看到程序发送Email的运行状态
+            session.setDebug(true);
+            // 2、通过session得到transport对象
+            Transport ts = session.getTransport();
+            // 3、使用邮箱的用户名和密码连上邮件服务器，发送邮件时，发件人需要提交邮箱的用户名和密码给smtp服务器，用户名和密码都通过验证之后才能够正常发送邮件给收件人。
+            ts.connect(sendemail.mail_host,sendemail.mailFrom, sendemail.password_mailFrom);
+            // 4、创建邮件
+            Message message = sendemail.createSimpleMail(session,sendemail.mailFrom,sendemail.mailTo,sendemail.mailTittle,sendemail.mailText);
+            // 5、发送邮件
+            ts.sendMessage(message, message.getAllRecipients());
+            ts.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
+
 
     //控制整个程序的运行
     //mian函数的输入参数为 0：文件夹的位置  1：操作的Hbase表的名称  2：输出的log文件的存储路径
+    //例如：hadoop jar com.hadoop.FileToHbaseControl /home/zhongnawei/files test3
     public static void main(String[] args){
 //        //测试用
 //        List<String> filepath = XMLFilePath(args[0]);
 //        for(String path : filepath){
 //            System.out.println(path);
 //        }
-        String a = "";
-        a = "Strat put files from xml to hbase";
-        System.out.println(a);
+        System.out.println("Strat put files from xml to hbase");
         //初始化链接Hbase
         String TableName = args[1];
+        SendEmail sendmail = new SendEmail();
         System.out.println("初始化链接到数据库中");
         init();
         List<String> filepath = XMLFilePath(args[0]);
-        //HbaseItem hbaseitom  = new HbaseItem();
+        if (filepath.size() == 0) {
+            Tomail(sendmail,"Error:find 0 file in the folder");
+        }
         System.out.println("开始处理数据");
         System.out.println(filepath.size());
-        //通过只new一个HbaseItem对象，减少系统的内存开销，
         //通过文件路径对每个文件进行处理
         for (int i = 0; i < filepath.size(); i++) {
             System.out.println(filepath.get(i));
