@@ -80,7 +80,7 @@ public class FileAnlysis {
                 System.out.println("开始传递数据");
 
 
-                if(element.getElementsByTagName("title").getLength() != 0){
+                if(element.getElementsByTagName("title").getLength() > 0){
 
                     hItem.setTitle(element.getElementsByTagName("title").item(0).getTextContent());
                     System.out.println("传递title成功 "+ "("+hItem.getTitle()+")" +element.getElementsByTagName("title").item(0).getTextContent());
@@ -88,37 +88,37 @@ public class FileAnlysis {
 
 
 
-                if(element.getElementsByTagName("time").getLength() != 0){
+                if(element.getElementsByTagName("time").getLength() > 0){
                     hItem.time = element.getElementsByTagName("time").item(0).getTextContent();
                     System.out.println("传递time成功 "+ "("+hItem.time+")" +element.getElementsByTagName("time").item(0).getTextContent());
                 }
 
 
-                if(element.getElementsByTagName("sortnumber").getLength() != 0){
+                if(element.getElementsByTagName("sortnumber").getLength() > 0){
                     hItem.sortnumber = element.getElementsByTagName("sortnumber").item(0).getTextContent();
                     System.out.println("传递sortnumber成功  " + "("+hItem.sortnumber+")"+ element.getElementsByTagName("sortnumber").item(0).getTextContent());
                 }
 
 
-                if(element.getElementsByTagName("fundsproject").getLength() != 0){
+                if(element.getElementsByTagName("fundsproject").getLength() > 0){
                     hItem.fundsproject = element.getElementsByTagName("fundsproject").item(0).getTextContent();
                     System.out.println("传递fundsproject成功  "+ "("+hItem.fundsproject+")" + element.getElementsByTagName("fundsproject").item(0).getTextContent());
                 }
 
 
-                if(element.getElementsByTagName("abstracts").getLength() != 0){
+                if(element.getElementsByTagName("abstracts").getLength() > 0){
                     hItem.abstracts = element.getElementsByTagName("abstracts").item(0).getTextContent();
                     System.out.println("传递abstracts成功  "+ "("+hItem.fundsproject+")" + element.getElementsByTagName("abstracts").item(0).getTextContent());
                 }
 
 
-                if(element.getElementsByTagName("organization").getLength() != 0){
+                if(element.getElementsByTagName("organization").getLength() > 0){
                     System.out.println("传递organization成功  "+ "("+hItem.fundsproject+")" + element.getElementsByTagName("organization").item(0).getTextContent());
                     hItem.organization = element.getElementsByTagName("organization").item(0).getTextContent();
                 }
 
 
-                if(element.getElementsByTagName("paperid").getLength() != 0){
+                if(element.getElementsByTagName("paperid").getLength() > 0){
                     hItem.paperid = element.getElementsByTagName("paperid").item(0).getTextContent();
                     System.out.println("传递organization成功  "+ "("+hItem.fundsproject+")" + element.getElementsByTagName("paperid").item(0).getTextContent());
                 }
@@ -126,7 +126,7 @@ public class FileAnlysis {
 
                 System.out.println("处理多数据");
 
-                if(element.getElementsByTagName("autors").getLength() != 0){
+                if(element.getElementsByTagName("autors").getLength() > 0){
                     num = element.getElementsByTagName("autors").getLength();
                     for (int j = 0; j < num; j++) {
 
@@ -140,7 +140,7 @@ public class FileAnlysis {
                 }
 
                 //String keyword
-                if(element.getElementsByTagName("keyword").getLength() != 0){
+                if(element.getElementsByTagName("keyword").getLength() > 0){
                     num = element.getElementsByTagName("keyword").getLength();
                     for (int j = 0; j < num; j++) {
                         if (j == 0) {
@@ -150,13 +150,13 @@ public class FileAnlysis {
                         }
 
                     }
-                    System.out.println("传递autors成功  "+ "("+hItem.fundsproject+")" + element.getElementsByTagName("autors").item(0).getTextContent());
+                    System.out.println("传递keyword成功  "+ "("+hItem.fundsproject+")" + element.getElementsByTagName("keyword").item(0).getTextContent());
                 }
 
 
 
                 //String publishinghouse
-                if(element.getElementsByTagName("publishinghouse").getLength() != 0){
+                if(element.getElementsByTagName("publishinghouse").getLength() > 0){
                     num = element.getElementsByTagName("publishinghouse").getLength();
                     for (int j = 0; j < num; j++) {
                         if (j == 0) {
@@ -170,7 +170,7 @@ public class FileAnlysis {
 
 
                 //String index
-                if(element.getElementsByTagName("index").getLength() != 0){
+                if(element.getElementsByTagName("index").getLength() > 0){
                     num = element.getElementsByTagName("index").getLength();
                     for (int j = 0; j < num; j++) {
                         if (j == 0) {

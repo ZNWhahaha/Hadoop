@@ -7,17 +7,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="823368b1-7da2-42cb-beaa-096db8ba3793" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../CleanoutControl/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../CleanoutControl/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../CleanoutControl/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../CleanoutControl/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../CleanoutControl/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../CleanoutControl/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../CleanoutControl/PaperShell.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../CleanoutControl/PaperShell.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../XMLAnalysis_FileToHbase/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../XMLAnalysis_FileToHbase/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/com_hadoop_FileToHbaseControl_jar/com.hadoop.FileToHbaseControl.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/com_hadoop_FileToHbaseControl_jar/com.hadoop.FileToHbaseControl.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/filestohbase/hbase/FileAnlysis.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filestohbase/hbase/FileAnlysis.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/filestohbase/hbase/SendEmail.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/filestohbase/hbase/FileAnlysis.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/filestohbase/hbase/FileAnlysis.class" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -148,6 +144,7 @@
       <workItem from="1587373138990" duration="10000" />
       <workItem from="1599183597992" duration="168000" />
       <workItem from="1599185032840" duration="3633000" />
+      <workItem from="1599529901832" duration="1474000" />
     </task>
     <servers />
   </component>
